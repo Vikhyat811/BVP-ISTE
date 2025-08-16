@@ -107,6 +107,42 @@
                 display: flex;
             }
         }
+        
+        /* --- NAVBAR LOAD ANIMATION --- */
+        @keyframes slideDownFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .header-content .logo,
+        .header-content .nav-link,
+        .header-content .BVCOE {
+            opacity: 0; /* Set initial state for animation */
+            animation: slideDownFadeIn 0.6s ease-out forwards;
+        }
+        /* Stagger the animations for a cascading effect */
+        .header-content .logo { animation-delay: 0.2s; }
+        .nav .nav-link:nth-child(1) { animation-delay: 0.4s; }
+        .nav .nav-link:nth-child(2) { animation-delay: 0.5s; }
+        .nav .nav-link:nth-child(3) { animation-delay: 0.6s; }
+        .header-content .BVCOE { animation-delay: 0.8s; }
+
+
+        /* --- SCROLL-BASED ANIMATIONS --- */
+        .animated-section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .animated-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
         /* --- UPCOMING EVENT SECTION --- */
         .upcoming-event-section {
@@ -348,13 +384,13 @@
             <nav class="nav">
                 <a href="./index.html" class="nav-link">Home</a>
                 <a href="./team.html" class="nav-link">Meet The Team</a>
-                <a href="./events.html" class="nav-link">Our Events</a>
+                <a href="#" class="nav-link">Our Events</a>
             </nav>
             <img src="Images/CLLG.png" class="BVCOE">
         </header>
 
         <main>
-            <section class="upcoming-event-section">
+            <section class="upcoming-event-section animated-section">
                 <h2 class="section-title">Upcoming Event</h2>
                 <p class="section-subtitle">Get ready for our next big thing!</p>
                 <div class="featured-event">
@@ -371,7 +407,7 @@
                 </div>
             </section>
 
-            <section class="past-events-section">
+            <section class="past-events-section animated-section">
                 <h2 class="section-title">Past Events</h2>
                 <p class="section-subtitle">A look back at our memorable moments.</p>
                 <div class="events-grid">
@@ -480,6 +516,20 @@
                     document.getElementById("countdown").innerHTML = "<h4>The Event has started!</h4>";
                 }
             }, 1000);
+
+            // --- SCROLL ANIMATION SCRIPT ---
+            const animatedSections = document.querySelectorAll('.animated-section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            animatedSections.forEach(section => {
+                observer.observe(section);
+            });
         });
 
         // --- MODAL/LIGHTBOX SCRIPT ---
@@ -516,7 +566,6 @@
             captionText.innerHTML = `${currentImageIndex + 1} / ${imagesInGallery.length}`;
         }
         
-        // Close modal on escape key press
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
                 closeModal();

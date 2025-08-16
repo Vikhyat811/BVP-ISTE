@@ -22,14 +22,15 @@
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;400;500;600;700;800&display=swap');
 
     :root {
-        --primary-color: #6366F1;
-        --accent-color: #3f83f8;
-        --text-color: #333333;
+        --primary-color: #8A2BE2; /* Vibrant Purple */
+        --accent-color: #00BFFF;  /* Deep Sky Blue */
+        --background-color: #0c0a1a;
+        --card-bg: rgba(20, 16, 48, 0.6);
+        --border-color: rgba(138, 43, 226, 0.3);
+        --text-light: #e0e0e0;
+        --text-dark: #a0a0a0;
         --link-color: #2563eb;
-        --background-color: #000000;
-        --light-gray: #dce3e3;
         --gray: #868c96;
-        --dark-color: #736c6c;
     }
     * {
         margin: 0;
@@ -42,9 +43,29 @@
         scroll-behavior: smooth;
     }
     body {
-        text-align: center;
         background-color: var(--background-color);
         color: white;
+        overflow-x: hidden;
+        position: relative;
+    }
+     /* Animated Starry Background */
+     body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle fill="%23fff" cx="25" cy="25" r="0.5"/><circle fill="%23fff" cx="50" cy="50" r="0.5"/><circle fill="%23fff" cx="75" cy="75" r="0.5"/><circle fill="%23fff" cx="10" cy="60" r="0.5"/><circle fill="%23fff" cx="90" cy="30" r="0.5"/><circle fill="%23fff" cx="40" cy="80" r="0.5"/><circle fill="%23fff" cx="60" cy="10" r="0.5"/></svg>');
+        background-size: 200px 200px;
+        animation: twinkle 15s linear infinite;
+        z-index: -1;
+        opacity: 0.3;
+    }
+
+    @keyframes twinkle {
+        from { background-position: 0 0; }
+        to { background-position: -200px 200px; }
     }
     .container{
         margin: 0 auto;
@@ -53,6 +74,8 @@
         justify-content: center;
         max-width: 1200px;
         padding: 0 1.5rem;
+        position: relative;
+        z-index: 1;
     }
 
     /* --- HEADER & NAVIGATION --- */
@@ -79,7 +102,7 @@
         transition: color 0.3s;
     }
     .nav-link:hover{
-        color: var(--link-color);
+        color: var(--accent-color);
     }
     .BVCOE{
         border-radius: 1rem;
@@ -91,6 +114,30 @@
             display: flex;
         }
     }
+    
+    /* --- NAVBAR LOAD ANIMATION --- */
+    @keyframes slideDownFadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    .header-content .logo,
+    .header-content .nav-link,
+    .header-content .BVCOE {
+        opacity: 0; /* Set initial state for animation */
+        animation: slideDownFadeIn 0.6s ease-out forwards;
+    }
+    /* Stagger the animations for a cascading effect */
+    .header-content .logo { animation-delay: 0.2s; }
+    .nav .nav-link:nth-child(1) { animation-delay: 0.4s; }
+    .nav .nav-link:nth-child(2) { animation-delay: 0.5s; }
+    .nav .nav-link:nth-child(3) { animation-delay: 0.6s; }
+    .header-content .BVCOE { animation-delay: 0.8s; }
 
     /* --- MAIN HERO SECTION --- */
     .main-section{
@@ -100,10 +147,11 @@
         align-items: center; 
         gap: 2rem;
         padding: 2rem 0;
+        min-height: 80vh; /* Ensure it takes up significant space */
     }
     .content-left, .content-right {
-        opacity: 0; /* Set initial state for animation */
-        animation: slideIn 1s ease-out forwards;
+        opacity: 0;
+        animation: slideIn 1s ease-out 0.8s forwards; /* Delay hero animation until after nav */
     }
     .content-left {
         display: flex;
@@ -122,7 +170,7 @@
         padding: 1rem 0;
     }
     .section-description{
-        color: var(--light-gray);
+        color: var(--text-light);
         font-size: 1.13rem;
         max-width: 600px;
         line-height: 1.6;
@@ -145,7 +193,7 @@
         border: 1px solid #555;
     }
     .start-button:hover{
-        background-color: #4f52c4;
+        background-color: #7a3de0;
         transform: translateY(-2px);
     }
     .tour-button:hover{
@@ -187,6 +235,17 @@
             opacity: 1;
             transform: translateY(0);
         }
+    }
+
+    /* --- SCROLL-BASED ANIMATIONS --- */
+    .animated-section {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .animated-section.visible {
+        opacity: 1;
+        transform: translateY(0);
     }
 
     /* --- DEPARTMENTS (FEATURES) SECTION --- */
@@ -271,8 +330,8 @@
         flex-direction: column;
         text-align: left;
         border-radius: 1rem;
-        background-color: #070707;
-        border: 1px solid #222;
+        background-color: var(--card-bg);
+        border: 1px solid var(--border-color);
         gap: 1rem;
         padding: 1.5rem;
         transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
@@ -280,10 +339,10 @@
     .testimonial-card:hover{
         transform: translateY(-5px);
         box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-        border-color: var(--primary-color);
+        border-color: var(--accent-color);
     }
     .testimonial-text{
-        color: var(--light-gray);
+        color: var(--text-light);
         font-style: italic;
         line-height: 1.6;
     }
@@ -302,7 +361,7 @@
     }
     .testimonial-name{
         font-size: 1.1rem;
-        color: var(--primary-color);
+        color: var(--accent-color);
         font-weight: 600;
     }
     .testimonial-desc{
@@ -316,9 +375,11 @@
     }
     .newsletter-content{
         display: flex;
-        background-color: #1a1a1a;
+        background-color: var(--card-bg);
+        border: 1px solid var(--border-color);
         border-radius: 1rem;
         overflow: hidden;
+        backdrop-filter: blur(10px);
     }
     .news-left{
         width: 50%;
@@ -344,7 +405,7 @@
     }
     .news-info h2{
         font-size: clamp(1.8rem, 4vw, 2.5rem);
-        color: var(--primary-color);
+        color: var(--accent-color);
     }
     .news-info p{
         font-size: 1rem;
@@ -362,9 +423,9 @@
        .news-form { flex-direction: row; }
     }
     .news-email{
-        background-color: #333;
+        background-color: rgba(0,0,0,0.3);
         outline: none;
-        border: 1px solid #555;
+        border: 1px solid var(--border-color);
         color: white;
         padding: 0.8rem 1rem;
         border-radius: 8px;
@@ -372,8 +433,8 @@
         transition: border-color 0.3s, box-shadow 0.3s;
     }
     .news-email:focus{
-        border-color: var(--primary-color);
-        box-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+        border-color: var(--accent-color);
+        box-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
     }
     .news-send-button{
         color: white;
@@ -386,7 +447,7 @@
         transition: background-color 0.3s;
     }
     .news-send-button:hover{
-        background-color: #4f52c4;
+        background-color: #7a3de0;
     }
     .privacy-policy {
         font-size: 0.8rem;
@@ -394,7 +455,7 @@
     }
     .privacy-policy a{
         text-decoration: underline;
-        color: var(--light-gray);
+        color: var(--text-light);
     }
 
     /* --- NEW FOOTER DESIGN --- */
@@ -513,7 +574,7 @@
         </main>
     </div>
 
-    <section id="departments" class="feature-container">
+    <section id="departments" class="feature-container animated-section">
         <div class="feature-content">
             <div class="main-info">
                 <h2 class="main-title">Our Departments</h2>
@@ -597,7 +658,7 @@
     </section>
 
     <div class="container">
-        <section class="testimonial-container">
+        <section class="testimonial-container animated-section">
             <div class="testimonial-content">
                 <h2 style="color: white;">Our Faculty Mentors</h2>
             </div>
@@ -635,7 +696,7 @@
             </div>
         </section>
 
-        <section id="events" class="newsletter-container">
+        <section id="events" class="newsletter-container animated-section">
             <div class="newsletter-content">
                 <div class="news-left">
                     <img src="/Images/BgDesign.jpeg" loading="lazy" alt="Newsletter Image">
@@ -727,6 +788,24 @@
                 successMessage.classList.remove('show');
             }, 3000);
         }
+
+        // --- SCROLL ANIMATION SCRIPT ---
+        const animatedSections = document.querySelectorAll('.animated-section');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Stop observing once it's visible
+                }
+            });
+        }, {
+            threshold: 0.1 // Trigger when 10% of the element is visible
+        });
+
+        animatedSections.forEach(section => {
+            observer.observe(section);
+        });
     });
 </script>
 
