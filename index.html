@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BVP ISTE</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+      (function(){
+          // Initialize EmailJS with your Public Key
+          emailjs.init({
+              publicKey: "GCRA9JwHY1iDxD8lE",
+          });
+      })();
+    </script>
+
+<style>
+    /* --- FONTS & GLOBAL STYLES --- */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;400;500;600;700;800&display=swap');
+
+    :root {
+        --primary-color: #6366F1;
+        --accent-color: #3f83f8;
+        --text-color: #333333;
+        --link-color: #2563eb;
+        --background-color: #000000;
+        --light-gray: #dce3e3;
+        --gray: #6a6969;
+        --dark-color: #736c6c;
+    }
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: 'Inter', sans-serif;
+        text-decoration: none;
+        box-sizing: border-box;
+    }
+    html {
+        scroll-behavior: smooth;
+    }
+    body {
+        text-align: center;
+        background-color: var(--background-color);
+        color: white;
+    }
+    .container{
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        max-width: 1200px;
+        padding: 0 1.5rem;
+    }
+
+    /* --- HEADER & NAVIGATION --- */
+    .header-content {
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center; 
+        padding: 1rem 0;
+    }
+    .logo-icon {
+        height: 5rem;
+        width: 6.64rem;
+        border-radius: 1rem;
+    }
+    .nav{
+        display: none; /* Hidden on mobile */
+        gap: 3.5rem;
+    }
+    .nav-link{
+        color: white;
+        font-weight: 600;
+        transition: color 0.3s;
+    }
+    .nav-link:hover{
+        color: var(--link-color);
+    }
+    .BVCOE{
+        border-radius: 1rem;
+        height: 4rem;
+        width: auto;
+    }
+    @media screen and (min-width: 768px) {
+        .nav {
+            display: flex;
+        }
+    }
+
+    /* --- MAIN HERO SECTION --- */
+    .main-section{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center; 
+        gap: 2rem;
+        padding: 2rem 0;
+    }
+    .content-left, .content-right {
+        opacity: 0; /* Set initial state for animation */
+        animation: slideIn 1s ease-out forwards;
+    }
+    .content-left {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+    .section-label{
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--primary-color);
+    }
+    .section-title{
+        font-weight: 800;
+        font-size: clamp(2.5rem, 5vw, 3.5rem); /* Responsive font size */
+        padding: 1rem 0;
+    }
+    .section-description{
+        color: var(--light-gray);
+        font-size: 1.13rem;
+        max-width: 600px;
+        line-height: 1.6;
+    }
+    .button-grp{
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+    .start-button, .tour-button{
+        padding: 0.8rem 1.5rem;
+        color: white;
+        border-radius: 8px;
+        background-color: var(--primary-color);
+        font-weight: 600;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+    .tour-button{
+        background-color: #333;
+        border: 1px solid #555;
+    }
+    .start-button:hover{
+        background-color: #4f52c4;
+        transform: translateY(-2px);
+    }
+    .tour-button:hover{
+        background-color: #444;
+        transform: translateY(-2px);
+    }
+    .img-container{
+        box-shadow: 0px 20px 40px rgba(0,0,0,0.4);
+        border-radius: 1rem;
+        overflow: hidden;
+        max-width: 550px;
+        width: 100%;
+    }
+    .section-image{
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+    @media screen and (min-width: 1024px){
+        .main-section{
+            flex-direction: row;
+            gap: 3rem;
+        }
+        .content-left{
+            text-align: left;
+            align-items: flex-start;
+            flex: 1;
+        }
+        .content-right {
+            flex: 1;
+        }
+    }
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* --- DEPARTMENTS (FEATURES) SECTION --- */
+    .feature-container{
+        background-color: #121212; 
+        color: white;
+        padding: 5rem 1.5rem;
+        text-align: center;
+        border-radius: 2rem;
+        margin: 4rem 0;
+    }
+    .feature-content{
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    .main-info p {
+        max-width: 600px;
+        margin: 1rem auto 0 auto;
+        color: var(--gray);
+        line-height: 1.6;
+    }
+    .feature-grid{
+        display: grid;
+        gap: 1.5rem;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        margin-top: 3rem;
+    }
+    .feature-card{
+        display: flex;
+        flex-direction:column;
+        align-items: center;
+        gap: 1rem;
+        border-radius: 1rem;
+        padding: 2rem 1.5rem;
+        color: white;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+    .icon-container{
+        height: 8rem;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .feature-svg{
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+    }
+    .feature-title{
+        font-weight: bold;
+        font-size: 1.25rem;
+    }
+    .feature-description{
+        color: rgba(255,255,255,0.8);
+        line-height: 1.5;
+    }
+    .feature-card:nth-child(1){ background-color: #4a90e2; }
+    .feature-card:nth-child(2){ background-color: #fcbf58; }
+    .feature-card:nth-child(3){ background-color: #fab5b6; }
+    .feature-card:nth-child(4){ background-color: #44bfc3; }
+    .feature-card:nth-child(5){ background-color: #77b058; }
+    .feature-card:nth-child(6){ background-color: #7d78b1; }
+
+    /* --- TESTIMONIALS SECTION --- */
+    .testimonial-container{
+        padding: 4rem 0;
+    }
+    .testimonial-grid{
+        display: grid;
+        justify-content: center;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        padding-top: 3rem;
+    }
+    .testimonial-card{
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        border-radius: 1rem;
+        background-color: #070707;
+        border: 1px solid #222;
+        gap: 1rem;
+        padding: 1.5rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    .testimonial-card:hover{
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        border-color: var(--primary-color);
+    }
+    .testimonial-text{
+        color: var(--light-gray);
+        font-style: italic;
+        line-height: 1.6;
+    }
+    .testimonial-details {
+        margin-top: auto;
+        padding-top: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+    .testimonial-avatar img{
+        height: 4rem;
+        width: 4rem;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+    .testimonial-name{
+        font-size: 1.1rem;
+        color: var(--primary-color);
+        font-weight: 600;
+    }
+    .testimonial-desc{
+        color: var(--gray);
+        font-size: 0.9rem;
+    }
+
+    /* --- NEWSLETTER SECTION --- */
+    .newsletter-container{
+        padding: 4rem 0;
+    }
+    .newsletter-content{
+        display: flex;
+        background-color: #1a1a1a;
+        border-radius: 1rem;
+        overflow: hidden;
+    }
+    .news-left{
+        width: 50%;
+        display: none; /* Hidden on mobile */
+    }
+    .news-left img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .news-right{
+        width: 100%;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    @media screen and (min-width: 768px) {
+        .news-left { display: block; }
+        .news-right { width: 50%; align-items: flex-start; text-align: left; padding: 3rem;}
+    }
+    .news-info h2{
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
+        color: var(--primary-color);
+    }
+    .news-info p{
+        font-size: 1rem;
+        color: var(--gray);
+    }
+    .news-form{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
+        gap: 1rem;
+    }
+    @media screen and (min-width: 768px) {
+       .news-form { flex-direction: row; }
+    }
+    .news-email{
+        background-color: #333;
+        outline: none;
+        border: 1px solid #555;
+        color: white;
+        padding: 0.8rem 1rem;
+        border-radius: 8px;
+        flex-grow: 1;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .news-email:focus{
+        border-color: var(--primary-color);
+        box-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+    }
+    .news-send-button{
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 8px;
+        background-color: var(--primary-color);
+        padding: 0.8rem 1.5rem;
+        font-weight: 600;
+        transition: background-color 0.3s;
+    }
+    .news-send-button:hover{
+        background-color: #4f52c4;
+    }
+    .privacy-policy {
+        font-size: 0.8rem;
+        color: var(--gray);
+    }
+    .privacy-policy a{
+        text-decoration: underline;
+        color: var(--light-gray);
+    }
+
+    /* --- FOOTER SECTION --- */
+    .footer-container{
+        padding: 4rem 1.5rem 2rem 1.5rem;
+    }
+    .footer{
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+    }
+    @media screen and (min-width: 768px) {
+        .footer {
+            flex-direction: row;
+            justify-content: space-between;
+        }
+    }
+    .footer-top{
+        width: 100%;
+        max-width: 350px;
+        gap: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+    }
+    .clogo-icon{
+        height: 5rem;
+        border-radius: 5rem;
+    }
+    .filler-text{
+        color: var(--light-gray);
+        line-height: 1.6;
+    } 
+    .socials{
+        display: flex;
+        gap: 1rem;
+        margin-top: 0.5rem;
+    }
+    .social-icon{
+        height: 1.9rem;
+    }
+    .footer-grid{
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 3rem;
+        text-align: left;
+    }
+    .footer-grid-column{
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;   
+    }
+    .footer-grid-heading{
+        font-size: 1rem;
+        color: white;
+        font-weight: bold;
+    }
+    .footer-links-list{
+        display: flex;
+        flex-direction: column;
+        gap: 1rem; 
+        list-style-type: none;
+    }
+    .footer-link a{
+        color: var(--gray);
+        transition: color 0.3s;
+    }
+    .footer-link a:hover{
+        color: white;
+    }
+    .footer-bottom {
+        border-top: 1px solid #2a2a2a;
+        margin-top: 3rem;
+        padding-top: 2rem;
+        text-align: center;
+        color: var(--gray);
+    }
+    .credit{
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+    .credit a{
+        color: var(--link-color);
+        font-weight: 500;
+    }
+    .footer-copyright{
+        font-size: 0.8rem;
+    }
+    
+    /* --- SUCCESS MESSAGE STYLING --- */
+    #success-message {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translate(-50%, 150%);
+        background-color: #28a745;
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        transition: transform 0.4s ease-in-out;
+        z-index: 1000;
+    }
+    #success-message.show {
+        transform: translate(-50%, 0);
+    }
+
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <header class="header-content">
+                <a href="#Home" class="logo">
+                    <img src="/Images/JapaniLogo.jpg" class="logo-icon">
+                </a>
+                <nav class="nav">
+                    <a href="#Home" class="nav-link">Home</a>
+                    <a href="team.html" class="nav-link">Meet The Team</a>
+                    <a href="events.html" class="nav-link">Our Events</a>
+                </nav>
+                <img src="Images/CLLG.png" class="BVCOE">
+            </header>
+        </div>
+        
+        <main id="Home"> 
+            <section class="main-section">
+                <div class="content-left">
+                    <p class="section-label">ISTE Student Chapter</p>
+                    <h1 class="section-title">Indian Society for Technical Education</h1>
+                    <p class="section-description">
+                        Founded in 2011, the BVP ISTE Student Chapter at Bharati Vidyapeeth's College of Engineering is a thriving hub for innovation and technical excellence. With 300+ active members, we offer leadership, professional growth, and hands-on learning opportunities.
+                    </p>
+                    <div class="button-grp">
+                        <a href="#start" class="start-button">Become a Member</a>
+                        <a href="#tour" class="tour-button">Explore</a>
+                    </div>
+                </div>
+                <div class="content-right">
+                    <div class="img-container">
+                        <img src="Images/WhatsApp Image 2025-08-15 at 10.46.14 AM.jpeg" alt="ISTE Event" class="section-image">
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <section id="departments" class="feature-container">
+        <div class="feature-content">
+            <div class="main-info">
+                <h2 class="main-title">Our Departments</h2>
+                <p>"Our society runs on the creativity, skill, and passion of its different parts. Every single department plays an integral role in making our ideas come alive."</p>
+            </div>
+            <div class="feature-grid">
+                <!-- Card 1 -->
+                <div class="feature-card">
+                    <div class="icon-container">
+                        <img src="/Images/SoftTech.jpg" class="feature-svg">
+                    </div>
+                    <div class="feature-info">
+                        <div class="feature-title">SoftTech</div>
+                        <div class="feature-description">
+                            Softech empowers students to explore the software side of technology, turning creative ideas into practical applications.
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="feature-card">
+                    <div class="icon-container">
+                        <img src="/Images/pixelcraft.webp" class="feature-svg">
+                    </div>
+                    <div class="feature-info">
+                        <div class="feature-title">PixelCraft</div>
+                        <div class="feature-description">
+                            PixelCraft serves as your creative canvas for graphic design, allowing you to experiment and develop in the field of visuals.
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="feature-card">
+                    <div class="icon-container">
+                        <img src="/Images/Sponsorship.jpg" class="feature-svg">
+                    </div>
+                    <div class="feature-info">
+                        <div class="feature-title">Sponsorship</div>
+                        <div class="feature-description">
+                           The driving force behind our events, forging strategic partnerships with industry leaders to secure necessary resources.
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div class="feature-card">
+                    <div class="icon-container">
+                        <img src="/Images/Content.webp" class="feature-svg">
+                    </div>
+                    <div class="feature-info">
+                        <div class="feature-title">Content Creation</div>
+                        <div class="feature-description">
+                            Providing high-quality technical and non-technical guidance and making it accessible to a broader audience.
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 5 -->
+                <div class="feature-card">
+                    <div class="icon-container">
+                        <img src="/Images/EM.webp" class="feature-svg">
+                    </div>
+                    <div class="feature-info">
+                        <div class="feature-title">Event Management</div>
+                        <div class="feature-description">
+                            This department helps students build exceptional skills like critical thinking and public relations.
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 6 -->
+                <div class="feature-card">
+                    <div class="icon-container">
+                        <img src="/Images/sahitya.webp" class="feature-svg">
+                    </div>
+                    <div class="feature-info">
+                        <div class="feature-title">Sahitya</div>
+                        <div class="feature-description">
+                            Sahitya is the art of crafting clear, engaging, and impactful text that informs, persuades, or inspires readers.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <section class="testimonial-container">
+            <div class="testimonial-content">
+                <h2 style="color: white;">Our Faculty Mentors</h2>
+            </div>
+            <div class="testimonial-grid">
+                <!-- Card 1 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "Learning is a continuous and endless process and does not finish with the acquisition of a degree."
+                    </div>
+                    <div class="testimonial-details">
+                        <div class="testimonial-avatar">
+                            <img src="/Images/DrMaheshKumar.webp" alt="Dr. Mahesh Kumar">
+                        </div>
+                        <div>
+                            <h3 class="testimonial-name">Dr. Mahesh Kumar</h3>
+                            <p class="testimonial-desc">BVP ISTE Faculty Mentor</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        “Innovation distinguishes between a leader and a follower.” - Steve Jobs
+                    </div>
+                    <div class="testimonial-details">
+                        <div class="testimonial-avatar">
+                            <img src="/Images/HOD_IT.webp" alt="Prof. Prakhar Priyadarshi">
+                        </div>
+                        <div>
+                            <h3 class="testimonial-name">Prof. Prakhar Priyadarshi</h3>
+                            <p class="testimonial-desc">Vice Principal (Admin) & HOD, IT Dept.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="events" class="newsletter-container">
+            <div class="newsletter-content">
+                <div class="news-left">
+                    <img src="/Images/BgDesign.jpeg" loading="lazy" alt="Newsletter Image">
+                </div>
+                <div class="news-right">
+                    <div class="news-info">
+                        <h2>Get the latest updates</h2>
+                        <p>Sign up for our notifications</p>
+                    </div>
+                    <form class="news-form" id="newsletter-form">
+                        <input class="news-email" id="email-input" type="email" placeholder="Your E-mail" required>
+                        <button class="news-send-button" type="submit">Send</button>
+                    </form>
+                    <div class="privacy-policy">
+                        By signing up, you agree to our 
+                        <a href="#Terms">Terms of Service</a> and <a href="#Privacy">Privacy Policy</a>.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer-container">
+        <div class="footer">
+            <div class="footer-top">
+                <a href="#Home" class="logo">
+                    <img src="/Images/JapaniLogo.jpg" alt="BVP ISTE Logo" class="clogo-icon">
+                </a>
+                <p class="filler-text">Connect with developers from everywhere around the world. Make strong relationships with other members, boost your network and learn from each other.</p>
+                <div class="socials">
+                    <a class="social-link" href="https://www.instagram.com/bvpiste/"><img src="/Images/instagram.svg" class="social-icon"></a>
+                    <a class="social-link" href="https://x.com/bvpiste"><img src="/Images/twitter.svg" class="social-icon"></a>
+                    <a class="social-link" href="https://www.linkedin.com/in/bvp-iste-%F3%A0%80%A0-89529a218"><img src="/Images/linkedin.svg" class="social-icon"></a>
+                    <a class="social-link" href="#"><i class="fa-brands fa-whatsapp" style="font-size: 1.9rem; color: #96989c"></i></a>
+                </div>
+            </div>
+            <div class="footer-grid">
+                <div class="footer-grid-column">
+                    <div class="footer-grid-heading">Legal</div>
+                    <ul class="footer-links-list">
+                        <li class="footer-link"><a href="#mail">Mail</a></li>
+                        <li class="footer-link"><a href="#faqs">FAQs</a></li>
+                        <li class="footer-link"><a href="#TermsOfService">Terms Of Service</a></li>
+                        <li class="footer-link"><a href="#PrivacyPolicy">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="credit">Made by <a href="https://www.linkedin.com/in/vikhyat-bansal-6b4a37306/">Vikhyat B</a> & <a href="https://www.linkedin.com/in/himank-pandoh-58a0b52b1/">Himank P</a></div>
+            <div class="footer-copyright">© 2024 — Present BVP ISTE. All Rights Reserved.</div>
+        </div>
+    </footer>
+
+    <div id="success-message">Thank you for signing up!</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        const newsletterForm = document.getElementById('newsletter-form');
+        const emailInput = document.getElementById('email-input');
+        const successMessage = document.getElementById('success-message');
+
+        newsletterForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const userEmail = emailInput.value;
+
+            if (!userEmail || !userEmail.includes('@')) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+
+            const templateParams = {
+                user_email: userEmail
+            };
+
+            const serviceID = 'service_frwybne';
+            const templateID = 'template_u8iz6qf';
+
+            emailjs.send(serviceID, templateID, templateParams)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    showSuccessMessage();
+                    emailInput.value = '';
+                }, function(error) {
+                    console.log('FAILED...', error);
+                    alert('Oops! Something went wrong. Please try again.');
+                });
+        });
+
+        function showSuccessMessage() {
+            successMessage.classList.add('show');
+            setTimeout(function() {
+                successMessage.classList.remove('show');
+            }, 3000);
+        }
+    });
+</script>
+
+</body>
+</html>
