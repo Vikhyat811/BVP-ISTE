@@ -12,7 +12,7 @@
       (function(){
           // Initialize EmailJS with your Public Key
           emailjs.init({
-              publicKey: "GCRA9JwHY1iDxD8lE",
+              publicKey: "o1NCAQcyyGDr7icDx",
           });
       })();
     </script>
@@ -93,7 +93,7 @@
         border-radius: 1rem;
     }
     .nav{
-        display: none; /* Hidden on mobile */
+        display: none; /* Hidden on mobile by default */
         gap: 3.5rem;
     }
     .nav-link{
@@ -104,15 +104,67 @@
     .nav-link:hover{
         color: var(--accent-color);
     }
-    .BVCOE{
-        border-radius: 1rem;
-        height: 4rem;
-        width: auto;
+    .mobile-menu-button {
+        display: block;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.8rem;
+        cursor: pointer;
+        z-index: 1001; /* Ensure it's above other content */
     }
     @media screen and (min-width: 768px) {
         .nav {
             display: flex;
         }
+        .mobile-menu-button {
+            display: none;
+        }
+    }
+
+    /* --- MOBILE NAVIGATION OVERLAY --- */
+    .mobile-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--background-color);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        transform: translateX(100%);
+        transition: transform 0.4s ease-in-out;
+    }
+    .mobile-nav.open {
+        transform: translateX(0);
+    }
+    .mobile-nav .close-btn {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        font-size: 2.5rem;
+        color: white;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+    .mobile-nav-links {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        text-align: center;
+    }
+    .mobile-nav-links a {
+        color: white;
+        font-size: 2rem;
+        font-weight: 600;
+        transition: color 0.3s;
+    }
+    .mobile-nav-links a:hover {
+        color: var(--accent-color);
     }
     
     /* --- NAVBAR LOAD ANIMATION --- */
@@ -128,16 +180,17 @@
     }
     .header-content .logo,
     .header-content .nav-link,
-    .header-content .BVCOE {
+    .header-content .mobile-menu-button {
         opacity: 0; /* Set initial state for animation */
         animation: slideDownFadeIn 0.6s ease-out forwards;
     }
     /* Stagger the animations for a cascading effect */
-    .header-content .logo { animation-delay: 0.2s; }
+    .header-content .mobile-menu-button { animation-delay: 0.2s; }
     .nav .nav-link:nth-child(1) { animation-delay: 0.4s; }
     .nav .nav-link:nth-child(2) { animation-delay: 0.5s; }
     .nav .nav-link:nth-child(3) { animation-delay: 0.6s; }
-    .header-content .BVCOE { animation-delay: 0.8s; }
+    .header-content .logo { animation-delay: 0.8s; }
+
 
     /* --- MAIN HERO SECTION --- */
     .main-section{
@@ -540,15 +593,17 @@
     <div class="container">
         <div class="header">
             <header class="header-content">
-                <a href="#Home" class="logo">
-                    <img src="/Images/JapaniLogo.jpg" class="logo-icon">
-                </a>
+                <button class="mobile-menu-button" id="mobile-menu-open">
+                    <i class="fas fa-bars"></i>
+                </button>
                 <nav class="nav">
                     <a href="./index.html" class="nav-link">Home</a>
                     <a href="./team.html" class="nav-link">Meet The Team</a>
                     <a href="./events.html" class="nav-link">Our Events</a>
                 </nav>
-                <img src="Images/CLLG.png" class="BVCOE">
+                <a href="#Home" class="logo">
+                    <img src="/Images/JapaniLogo.jpg" class="logo-icon">
+                </a>
             </header>
         </div>
         
@@ -739,13 +794,23 @@
             </div>
             <div class="footer-divider"></div>
             <div class="footer-bottom">
-                <p>Made by <a href="https://www.linkedin.com/in/vikhyat-bansal-6b4a37306/">Vikhyat B</a> & <a href="https://www.linkedin.com/in/himank-pandoh-58a0b52b1/">Himank P</a></p>
+                <p>Made by <a href="https://www.linkedin.com/in/himank-pandoh-58a0b52b1/">Himank P</a> & <a href="https://www.linkedin.com/in/vikhyat-bansal-6b4a37306/">Vikhyat B</a></p>
                 <p>© 2024 — Present BVP ISTE. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
 
     <div id="success-message">Thank you for signing up!</div>
+    
+    <!-- Mobile Navigation Menu -->
+    <div class="mobile-nav" id="mobile-nav-menu">
+        <button class="close-btn" id="mobile-menu-close">&times;</button>
+        <div class="mobile-nav-links">
+            <a href="./index.html">Home</a>
+            <a href="./team.html">Meet The Team</a>
+            <a href="./events.html">Our Events</a>
+        </div>
+    </div>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -765,11 +830,11 @@
             }
 
             const templateParams = {
-                user_email: userEmail
+                email: userEmail
             };
 
-            const serviceID = 'service_frwybne';
-            const templateID = 'template_u8iz6qf';
+            const serviceID = 'service_gtwp96g';
+            const templateID = 'template_xhscrpw';
 
             emailjs.send(serviceID, templateID, templateParams)
                 .then(function(response) {
@@ -805,6 +870,19 @@
 
         animatedSections.forEach(section => {
             observer.observe(section);
+        });
+
+        // --- MOBILE NAVIGATION SCRIPT ---
+        const openMenuBtn = document.getElementById('mobile-menu-open');
+        const closeMenuBtn = document.getElementById('mobile-menu-close');
+        const mobileMenu = document.getElementById('mobile-nav-menu');
+
+        openMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('open');
+        });
+
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
         });
     });
 </script>

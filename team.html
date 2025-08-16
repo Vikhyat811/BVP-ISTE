@@ -81,6 +81,7 @@
     .nav{
         display: none;
         gap: 3.5rem;
+        margin-left: 1.5rem;
     }
     @media screen and (min-width: 768px) {
         .nav { display: flex; }
@@ -93,10 +94,64 @@
     .nav-link:hover{
         color: var(--accent-color);
     }
-    .BVCOE{
-        border-radius: 1rem;
-        height: 4rem;
-        width: auto;
+    .mobile-menu-button {
+        display: block;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.8rem;
+        cursor: pointer;
+        z-index: 1001;
+    }
+    @media screen and (min-width: 768px) {
+        .mobile-menu-button {
+            display: none;
+        }
+    }
+    
+    /* --- MOBILE NAVIGATION OVERLAY --- */
+    .mobile-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--background-color);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        transform: translateX(100%);
+        transition: transform 0.4s ease-in-out;
+    }
+    .mobile-nav.open {
+        transform: translateX(0);
+    }
+    .mobile-nav .close-btn {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        font-size: 2.5rem;
+        color: white;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+    .mobile-nav-links {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        text-align: center;
+    }
+    .mobile-nav-links a {
+        color: white;
+        font-size: 2rem;
+        font-weight: 600;
+        transition: color 0.3s;
+    }
+    .mobile-nav-links a:hover {
+        color: var(--accent-color);
     }
 
     /* --- LOAD ANIMATIONS --- */
@@ -106,15 +161,15 @@
     }
     .header-content .logo,
     .header-content .nav-link,
-    .header-content .BVCOE {
+    .header-content .mobile-menu-button {
         opacity: 0;
         animation: slideDownFadeIn 0.6s ease-out forwards;
     }
-    .header-content .logo { animation-delay: 0.2s; }
+    .header-content .mobile-menu-button { animation-delay: 0.2s; }
     .nav .nav-link:nth-child(1) { animation-delay: 0.4s; }
     .nav .nav-link:nth-child(2) { animation-delay: 0.5s; }
     .nav .nav-link:nth-child(3) { animation-delay: 0.6s; }
-    .header-content .BVCOE { animation-delay: 0.8s; }
+    .header-content .logo { animation-delay: 0.8s; }
 
     @keyframes fadeInUp {
         from { opacity: 0; transform: translateY(30px); }
@@ -125,7 +180,7 @@
     .team-container {
         display: flex;
         flex-wrap: wrap;
-        padding: 40px 0;
+        padding: 20px 0;
         justify-content: center;
         gap: 40px;
         width: 100%;
@@ -149,12 +204,20 @@
         color: var(--accent-color);
         text-align: center;
         margin: 2rem 0 1rem 0;
-        text-shadow: 0 0 10px var(--accent-color);
-        animation: fadeInUp 0.8s ease-out forwards;
+        animation: fadeInUp 0.8s ease-out forwards, pulsateGlow 3s infinite ease-in-out;
         opacity: 0;
     }
     
-    /* --- NEW CARD DESIGN --- */
+    @keyframes pulsateGlow {
+        0%, 100% {
+            text-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
+        }
+        50% {
+            text-shadow: 0 0 20px var(--accent-color), 0 0 40px var(--accent-color);
+        }
+    }
+
+    /* --- CARD DESIGN --- */
     .card {
         width: 350px;
         height: 500px;
@@ -238,23 +301,25 @@
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     .card-subtitle { font-weight: 700; font-size: 13px; color: var(--text-dark); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
     .card-desc { font-family: "DM Sans", sans-serif; font-size: 15px; line-height: 1.7; color: var(--text-light); }
-    .card-timeline { position: relative; }
-    .card-item { position: relative; padding-left: 60px; padding-bottom: 30px; }
-    .card-item:last-child { padding-bottom: 0; }
-    .card-item::before { content: attr(data-year); position: absolute; left: 0; top: 1px; text-align: right; width: 40px; font-size: 14px; font-weight: 700; color: var(--text-dark); }
-    .card-item::after { content: ''; position: absolute; left: 48px; top: 5px; bottom: -5px; width: 2px; background: var(--border-color); z-index: 1; }
-    .card-item:last-child::after { display: none; }
-    .card-item-dot { position: absolute; left: 42px; top: 4px; width: 12px; height: 12px; background: var(--background-color); border: 3px solid var(--accent-color); border-radius: 50%; z-index: 2; }
-    .card-item-content { position: relative; z-index: 2; }
-    .card-item-title { font-weight: 600; font-size: 15px; color: #fff; margin-bottom: 4px; }
-    .card-item-desc { font-size: 14px; color: var(--text-light); font-family: "DM Sans", sans-serif; }
-    .card-contact-wrapper { display: flex; flex-direction: column; gap: 15px; }
-    .card-contact { display: flex; align-items: center; gap: 15px; font-family: "DM Sans", sans-serif; color: var(--text-light); font-size: 15px; }
-    .card-contact i { font-size: 20px; color: var(--text-dark); width: 20px; text-align: center; }
-    .card-social { display: flex; gap: 15px; justify-content: center; margin-top: 20px; }
-    .card-social a { color: var(--text-dark); font-size: 24px; transition: color 0.3s, transform 0.3s; }
-    .card-social a:hover { color: var(--accent-color); transform: scale(1.1); }
-
+    
+    /* --- FACULTY SECTION --- */
+    .faculty-card {
+        width: 450px;
+        height: auto;
+        min-height: 400px;
+    }
+    .faculty-card .card-main {
+        padding-bottom: 2rem;
+    }
+    .faculty-card .card-avatar {
+        width: 160px;
+        height: 160px;
+        bottom: -80px;
+    }
+    .faculty-card .card-main {
+        padding-top: 90px;
+    }
+    
     /* --- NEW FOOTER DESIGN --- */
     .footer-container { padding: 4rem 1rem 2rem 1rem; }
     .new-footer { display: flex; flex-direction: column; align-items: center; gap: 2rem; }
@@ -275,20 +340,62 @@
     <div class="container">
         <!-- HEADER -->
         <header class="header-content">
-            <a href="./index.html" class="logo">
-                <img src="./Images/JapaniLogo.jpg" class="logo-icon">
-            </a>
+            <button class="mobile-menu-button" id="mobile-menu-open">
+                <i class="fas fa-bars"></i>
+            </button>
             <nav class="nav">
                 <a href="./index.html" class="nav-link">Home</a> 
                 <a href="./team.html" class="nav-link">Meet The Team</a>
                 <a href="./events.html" class="nav-link">Our Events</a>
             </nav>
-            <img src="./Images/CLLG.png" class="BVCOE">
+            <a href="./index.html" class="logo">
+                <img src="./Images/JapaniLogo.jpg" class="logo-icon">
+            </a>
         </header>
 
         <!-- MAIN TEAM CONTENT -->
         <div class="team-container">
             <h2 class="team-title">Meet The Team</h2>
+
+            <h3 class="team-division-title">Faculty Mentors</h3>
+
+            <!-- Faculty Card 1 -->
+            <div class="card faculty-card">
+                <div class="card-header">
+                    <div class="card-cover" style="background-image: url('./Images/WhatsApp Image 2025-08-15 at 10.46.14 AM.jpeg')"></div>
+                    <img class="card-avatar" src="./Images/DrMaheshKumar.webp" alt="avatar" />
+                </div>
+                <div class="card-main">
+                    <div class="card-info">
+                        <h1 class="card-fullname">Dr. Mahesh Kumar</h1>
+                        <h2 class="card-jobtitle">BVP ISTE Faculty Mentor</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-section is-active">
+                            <p class="card-desc">"Learning is a continuous and endless process and does not finish with the acquisition of a degree."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Faculty Card 2 -->
+            <div class="card faculty-card">
+                <div class="card-header">
+                    <div class="card-cover" style="background-image: url('./Images/WhatsApp Image 2025-08-15 at 10.46.14 AM.jpeg')"></div>
+                    <img class="card-avatar" src="./Images/HOD_IT.webp" alt="avatar" />
+                </div>
+                <div class="card-main">
+                    <div class="card-info">
+                        <h1 class="card-fullname">Prof. Prakhar Priyadarshi</h1>
+                        <h2 class="card-jobtitle">Vice Principal (Admin) & HOD, IT Dept.</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-section is-active">
+                            <p class="card-desc">“Innovation distinguishes between a leader and a follower.” - Steve Jobs</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
             
             <h3 class="team-division-title">Core Heads</h3>
 
@@ -1229,6 +1336,7 @@
                     </div>
                 </div>
             </div>
+
             
         </div>
     </div>
@@ -1254,15 +1362,28 @@
             </div>
             <div class="footer-divider"></div>
             <div class="footer-bottom">
-                <p>Made by <a href="https://www.linkedin.com/in/vikhyat-bansal-6b4a37306/">Vikhyat B</a> & <a href="https://www.linkedin.com/in/himank-pandoh-58a0b52b1/">Himank P</a></p>
+                <p>Made by <a href="https://www.linkedin.com/in/himank-pandoh-58a0b52b1/">Himank P</a> & <a href="https://www.linkedin.com/in/vikhyat-bansal-6b4a37306/">Vikhyat B</a></p>
                 <p>© 2024 — Present BVP ISTE. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
 
+    <!-- Mobile Navigation Menu -->
+    <div class="mobile-nav" id="mobile-nav-menu">
+        <button class="close-btn" id="mobile-menu-close">&times;</button>
+        <div class="mobile-nav-links">
+            <a href="./index.html">Home</a>
+            <a href="./team.html">Meet The Team</a>
+            <a href="./events.html">Our Events</a>
+        </div>
+    </div>
+
 <script>
     // SCRIPT TO HANDLE TABS FOR EACH CARD INDIVIDUALLY
     document.querySelectorAll(".card").forEach(card => {
+        // Do not add tab logic to faculty cards
+        if (card.classList.contains('faculty-card')) return;
+
         const buttons = card.querySelectorAll(".card-buttons button");
         const sections = card.querySelectorAll(".card-section");
 
@@ -1289,6 +1410,19 @@
                 }
             });
         });
+    });
+
+    // --- MOBILE NAVIGATION SCRIPT ---
+    const openMenuBtn = document.getElementById('mobile-menu-open');
+    const closeMenuBtn = document.getElementById('mobile-menu-close');
+    const mobileMenu = document.getElementById('mobile-nav-menu');
+
+    openMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.add('open');
+    });
+
+    closeMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
     });
 </script>
 
