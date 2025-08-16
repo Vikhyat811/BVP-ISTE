@@ -140,7 +140,20 @@
         animation: fadeInUp 0.8s ease-out 0.8s forwards;
         opacity: 0;
     }
-
+    
+    /* --- NEW DIVISION TITLE --- */
+    .team-division-title {
+        width: 100%;
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: var(--accent-color);
+        text-align: center;
+        margin: 2rem 0 1rem 0;
+        text-shadow: 0 0 10px var(--accent-color);
+        animation: fadeInUp 0.8s ease-out forwards;
+        opacity: 0;
+    }
+    
     /* --- NEW CARD DESIGN --- */
     .card {
         width: 350px;
@@ -165,14 +178,14 @@
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
     /* Staggered animation delay for cards */
-    .card:nth-of-type(1) { animation-delay: 1s; }
-    .card:nth-of-type(2) { animation-delay: 1.1s; }
-    .card:nth-of-type(3) { animation-delay: 1.2s; }
-    .card:nth-of-type(4) { animation-delay: 1.3s; }
-    .card:nth-of-type(5) { animation-delay: 1.4s; }
-    .card:nth-of-type(6) { animation-delay: 1.5s; }
-    .card:nth-of-type(7) { animation-delay: 1.6s; }
-    .card:nth-of-type(8) { animation-delay: 1.7s; }
+    .team-container > .card:nth-of-type(1) { animation-delay: 1s; }
+    .team-container > .card:nth-of-type(2) { animation-delay: 1.1s; }
+    .team-container > .card:nth-of-type(3) { animation-delay: 1.2s; }
+    .team-container > .card:nth-of-type(4) { animation-delay: 1.3s; }
+    .team-container > .card:nth-of-type(5) { animation-delay: 1.4s; }
+    .team-container > .card:nth-of-type(6) { animation-delay: 1.5s; }
+    .team-container > .card:nth-of-type(7) { animation-delay: 1.6s; }
+    .team-container > .card:nth-of-type(8) { animation-delay: 1.7s; }
 
     /* --- CARD LAYOUT ADJUSTMENTS --- */
     .card-header {
@@ -275,7 +288,9 @@
 
         <!-- MAIN TEAM CONTENT -->
         <div class="team-container">
-            <h2 class="team-title">Meet The Core Team</h2>
+            <h2 class="team-title">Meet The Team</h2>
+            
+            <h3 class="team-division-title">Core Heads</h3>
 
             <!-- Card 1 Start -->
             <div class="card">
@@ -552,16 +567,18 @@
                     </div>
                 </div>
             </div>
+            
+            <h3 class="team-division-title">Team Heads</h3>
 
             <!-- Card 6 -->
             <div class="card">
                 <div class="card-header">
                     <div class="card-cover" style="background-image: url('Images/WhatsApp Image 2025-08-15 at 10.46.14 AM.jpeg')"></div>
-                    <img class="card-avatar" src="./Images/Heads/Anush.jpg" alt="avatar" />
+                    <img class="card-avatar" src="./Images/Heads/Vikhyat.jpg" alt="avatar" />
                 </div>
                 <div class="card-main">
                     <div class="card-info">
-                        <h1 class="card-fullname">Anush Singla</h1>
+                        <h1 class="card-fullname">Vikhyat Bansal</h1>
                         <h2 class="card-jobtitle">Softech Head</h2>
                     </div>
                     <div class="card-body">
@@ -609,14 +626,14 @@
             </div>
 
             <!-- Card 7 -->
-             <div class="card">
+            <div class="card">
                 <div class="card-header">
                     <div class="card-cover" style="background-image: url('Images/WhatsApp Image 2025-08-15 at 10.46.14 AM.jpeg')"></div>
-                    <img class="card-avatar" src="./Images/Heads/Vikhyat.jpg" alt="avatar" />
+                    <img class="card-avatar" src="./Images/Heads/Anush.jpg" alt="avatar" />
                 </div>
                 <div class="card-main">
                     <div class="card-info">
-                        <h1 class="card-fullname">Vikhyat Bansal</h1>
+                        <h1 class="card-fullname">Anush Singla</h1>
                         <h2 class="card-jobtitle">Softech Head</h2>
                     </div>
                     <div class="card-body">
@@ -1231,7 +1248,7 @@
             </nav>
             <div class="footer-socials">
                 <a href="https://www.instagram.com/bvpiste/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://x.com/bvpiste" target="_blank" aria-label="Twitter"><i class="fab fa-instagram"></i></a>
+                <a href="https://x.com/bvpiste" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                 <a href="https://www.linkedin.com/in/bvp-iste-%F3%A0%80%A0-89529a218" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
                 <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
             </div>
