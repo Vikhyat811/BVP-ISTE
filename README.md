@@ -1,2 +1,2 @@
 # BVP-ISTE
-A project for my college society website
+A project made from scratch by uss for my Tech Society BVP-ISTE's website.
