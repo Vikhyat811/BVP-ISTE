@@ -247,7 +247,7 @@
         }
 
         /* --- PAST EVENTS SECTION --- */
-        .past-events-section {
+/*         .past-events-section {
             padding: 4rem 0;
         }
         .events-grid {
@@ -318,7 +318,82 @@
             transform: scale(1.05);
             filter: brightness(0.8);
         }
+ */
+        /* --- PAST EVENTS SECTION --- */
+        .past-events-section {
+            padding: 4rem 0;
+        }
+        .events-grid {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: 1fr;
+        }
+        .event-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        .event-card-content {
+            padding: 2rem;
+            text-align: left;
+        }
+        .event-card-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+        .event-card-description {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        .event-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(120px, 2fr));
+            gap: 1rem;
+            object-fit: cover; 
+        }
+        
+        .event-gallery img {
+            width: 100%;
+            height: 18rem;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+        @media (max-width: 768px) {
+            .event-gallery {
+                /* Changes the grid to a single column on screens 768px or less */
+                grid-template-columns: 1fr; 
+                object-fit: cover;
+            }
+            .event-gallery img {
+            width: 100%;
+            height: 9rem;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, filter 0.3s ease;
+            }
+            .Squid{
+                height: 10rem;
+            }
+        }
 
+        .event-gallery img:hover {
+            transform: scale(1.05);
+            filter: brightness(0.8);
+        }
         /* --- MODAL/LIGHTBOX STYLES --- */
         .modal {
             display: none;
@@ -470,6 +545,89 @@
                     </div>
                 </div>
             </section> -->
+
+<!--             <section class="past-events-section">
+                <h2 class="section-title">Past Events</h2>
+                <p class="section-subtitle">A look back at our memorable moments.</p>
+                <div class="events-grid">
+                    <!-- Card 1 -->
+                    <div class="event-card">
+                        <div class="event-card-content">
+                            <h3 class="event-card-title">Generative AI Tools & Applications Session🌐</h3>
+                            <p class="event-card-description">
+                                A hands-on session exploring the latest in Generative AI. Members experimented with various AI tools and learned to apply them in real-world projects, from text generation to image synthesis.
+                            </p>
+                            <div class="event-gallery">
+                                <img src="ISTE_Events/GenAI/0.jpg" alt="Generative AI Event Image 1" onclick="openModal(this)">
+                                <img src="ISTE_Events/GenAI/1.jpg" alt="Generative AI Event Image 2" onclick="openModal(this)">
+                                <img src="ISTE_Events/GenAI/2.jpg" alt="Generative AI Event Image 3" onclick="openModal(this)">
+                                <img src="ISTE_Events/GenAI/3.jpg" alt="Generative AI Event Image 4" onclick="openModal(this)">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="event-card">
+                        <div class="event-card-content">
+                            <h3 class="event-card-title">Beyond The Buzzer🕹</h3>
+                            <p class="event-card-description">
+                                Join us for an evening of intellectual fun and competition. The event begins with a general knowledge quiz to test your wits, followed by a final, high-stakes round of Jeopardy to determine our ultimate champion.
+                            </p>
+                            <div class="event-gallery two">
+                                <img src="ISTE_Events/BTB/1.jpg" alt="SETU Competition Image 1" onclick="openModal(this)">
+                                <img src="ISTE_Events/BTB/2.jpg" alt="SETU Competition Image 2" onclick="openModal(this)">
+                                <img src="ISTE_Events/BTB/0.jpg" alt="SETU Competition Image 3" onclick="openModal(this)">
+                                <img src="ISTE_Events/BTB/4.jpg" alt="SETU Competition Image 4" onclick="openModal(this)">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="event-card">
+                        <div class="event-card-content">
+                            <h3 class="event-card-title">Tech Titans💻</h3>
+                            <p class="event-card-description">
+                                18th October,2024<br>
+                                Tech Titans turned the traditional product pitch approach into a dynamic exhibit of ideas for the future. On our stage, more than 20 groups of budding creative minds showcased innovative solutions related to digital transformation, sustainability, and healthcare.
+                            </p>
+                            <div class="event-gallery">
+                                <img src="ISTE_Events/TechTitans/0.jpg" alt="Web Dev Bootcamp Image 1" onclick="openModal(this)">
+                                <img src="ISTE_Events/TechTitans/1.webp" alt="Web Dev Bootcamp Image 2" onclick="openModal(this)">
+                                <img src="ISTE_Events/TechTitans/2.webp" alt="Web Dev Bootcamp Image 3" onclick="openModal(this)">
+                                <img src="ISTE_Events/TechTitans/3.jpg" alt="Web Dev Bootcamp Image 4" onclick="openModal(this)">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="event-card">
+                        <div class="event-card-content">
+                            <h3 class="event-card-title">Squid Games!!</h3>
+                            <p class="event-card-description">
+                                16th October,2024<br>
+                                Our fun-filled take on the popular Netflix show turned traditional kid-friendly games into a memorable strategic and skill-building event. From Red Light Green Light to team-based games, participants from all around the community gathered to put their wits and agility to the test through a variety of creatively recreated obstacles                            </p>
+                            <div class="event-gallery">
+                                <img class="Squid" src="ISTE_Events/Squid/SquidGamesPoster.jpg" style="height: 40rem;" alt="Web Dev Bootcamp Image 1" onclick="openModal(this)">
+                                <img class="Squid" src="ISTE_Events/Squid/1.jpg" style="height: 40rem;" alt="Web Dev Bootcamp Image 2" onclick="openModal(this)">
+                                <img src="ISTE_Events/Squid/2.webp" alt="Web Dev Bootcamp Image 3" onclick="openModal(this)">
+                                <img src="ISTE_Events/Squid/3.jpg" alt="Web Dev Bootcamp Image 4" onclick="openModal(this)">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 5 -->
+                    <div class="event-card">
+                        <div class="event-card-content">
+                            <h3 class="event-card-title">UpGrad Elevate Seminar</h3>
+                            <p class="event-card-description">
+                                15th October, 2024<br>
+                                In an engaging and insightful session, participants came together to explore endless possibilities for pursuing higher education at top-tier global universities. From comprehensive guidance by study abroad experts to exclusive scholarship opportunities worth INR 40 lakhs, the seminar was packed with value-driven takeaways.
+                            </p>
+                            <div class="event-gallery">
+                                <img src="ISTE_Events/UpGrad/UpGrad.webp" style="height: 27.5rem;" alt="Web Dev Bootcamp Image 1" onclick="openModal(this)">
+                                <img src="ISTE_Events/UpGrad/UpGrad1.webp" style="height: 27.5rem;" alt="Web Dev Bootcamp Image 2" onclick="openModal(this)">
+                                <img src="ISTE_Events/UpGrad/UpGradGrp.webp" alt="Web Dev Bootcamp Image 3" onclick="openModal(this)">
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
 
             <section class="past-events-section">
                 <h2 class="section-title">Past Events</h2>
