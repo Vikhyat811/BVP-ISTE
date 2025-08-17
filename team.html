@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <style>
+
     /* --- GLOBAL & THEME STYLES --- */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
     @import url("https://fonts.googleapis.com/css?family=DM+Sans:400,500|Jost:400,500,600&display=swap");
@@ -35,8 +36,8 @@
         overflow-x: hidden;
         position: relative;
     }
-     /* Animated Starry Background */
-     body::before {
+    /* Animated Starry Background */
+    body::before {
         content: '';
         position: fixed;
         top: 0;
@@ -284,16 +285,34 @@
         flex-grow: 1;
         text-align: center;
         transition: padding-top 0.4s ease;
+        min-height: 0; /* FIXED: Prevents flex content from overflowing its container */
     }
     .card.experience-active .card-header { height: 100px; }
     .card.experience-active .card-avatar { width: 100px; height: 100px; bottom: -50px; }
     .card.experience-active .card-main { padding-top: 60px; }
 
-    .card-info { padding: 0 20px 15px 20px; }
+    .card-info { 
+        padding: 0 20px 15px 20px;
+        flex-shrink: 0; /* FIXED: Prevents this section from shrinking */
+    }
     .card-fullname { font-size: 1.5rem; font-weight: 700; color: #fff; }
     .card-jobtitle { font-size: 0.9rem; font-weight: 500; color: var(--accent-color); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
-    .card-body { flex-grow: 1; overflow-y: auto; }
-    .card-buttons { display: flex; border-top: 1px solid var(--border-color); margin-top: auto; flex-shrink: 0; }
+    .card-body { 
+        flex-grow: 1; 
+        overflow-y: auto; 
+        scrollbar-width: none; 
+        -ms-overflow-style: none;
+        min-height: 0; /* FIXED: Allows this element to shrink and enables scrolling */
+    }
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .card-body::-webkit-scrollbar {
+        display: none;
+    }
+    .card-buttons { 
+        display: flex; 
+        border-top: 1px solid var(--border-color); 
+        flex-shrink: 0; /* FIXED: Removed margin-top: auto and kept flex-shrink */
+    }
     .card-buttons button { flex: 1; padding: 15px 5px; background: transparent; border: 0; border-bottom: 3px solid transparent; color: var(--text-dark); font-size: 14px; font-weight: 600; cursor: pointer; transition: color 0.3s, border-color 0.3s; }
     .card-buttons button.is-active, .card-buttons button:hover { color: white; border-bottom-color: var(--accent-color); }
     .card-section { display: none; padding: 25px; text-align: left; animation: fadeIn 0.5s ease; }
@@ -301,6 +320,105 @@
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     .card-subtitle { font-weight: 700; font-size: 13px; color: var(--text-dark); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
     .card-desc { font-family: "DM Sans", sans-serif; font-size: 15px; line-height: 1.7; color: var(--text-light); }
+
+    /* --- CARD EXPERIENCE TIMELINE (CORRECTED ALIGNMENT) --- */
+    .card-timeline {
+        position: relative;
+        /* Create space on the left for the year, line, and dot */
+        padding-left: 80px;
+    }
+
+    /* The vertical line of the timeline */
+    .card-timeline::before {
+        content: '';
+        position: absolute;
+        /* Position the line within the new gutter space */
+        left: 50px;
+        top: 5px;
+        bottom: 5px;
+        width: 2px;
+        background-color: var(--border-color);
+    }
+
+    .card-item {
+        position: relative; /* Each item is an anchor for its own dot and year */
+        margin-bottom: 1.5rem;
+    }
+
+    .card-item:last-child {
+        margin-bottom: 0;
+    }
+
+    /* The Year, positioned safely to the left of the line */
+    .card-item::before {
+        content: attr(data-year);
+        position: absolute;
+        top: 2px;
+        /* Positioned relative to the item's text, now safely outside the content area */
+        left: -80px;
+        width: 40px;
+        text-align: right; /* Aligns the year neatly */
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--text-dark);
+    }
+
+    /* The Dot, centered perfectly on the line */
+    .card-item-dot {
+        position: absolute;
+        top: 5px;
+        left: -37px; /* FIXED: This value is now corrected for perfect center alignment */
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background-color: var(--accent-color);
+        border: 3px solid var(--card-bg);
+    }
+
+    .card-item-title {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--text-light);
+        margin-bottom: 4px;
+    }
+
+    .card-item-desc {
+        font-size: 0.9rem;
+        color: var(--text-dark);
+        line-height: 1.5;
+    }
+
+    /* --- CARD CONTACT & SOCIALS --- */
+    .card-contact-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+        margin-top: 1rem;
+    }
+    .card-contact {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        color: var(--text-light);
+    }
+    .card-contact i {
+        color: var(--accent-color);
+    }
+    .card-social {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+    }
+    .card-social a {
+        color: var(--gray);
+        font-size: 1.6rem;
+        transition: color 0.3s ease, transform 0.3s ease;
+    }
+    .card-social a:hover {
+        color: var(--accent-color);
+        transform: translateY(-3px);
+    }
     
     /* --- FACULTY SECTION --- */
     .faculty-card {
@@ -333,6 +451,9 @@
     .footer-divider { width: 100%; max-width: 800px; height: 1px; background-color: #2a2a2a; margin: 1rem 0; }
     .footer-bottom { text-align: center; color: var(--gray); font-size: 0.9rem; }
     .footer-bottom a { color: var(--link-color); font-weight: 500; }
+
+
+
 </style>
 
 </head>
@@ -423,13 +544,6 @@
                                         <div class="card-item-desc">Organized the annual tech fest, managing a team of 20 volunteers.</div>
                                     </div>
                                 </div>
-                                <div class="card-item" data-year="2023">
-                                    <div class="card-item-dot"></div>
-                                    <div class="card-item-content">
-                                        <div class="card-item-title"></div>
-                                        <div class="card-item-desc"></div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <div class="card-section" id="contact">
@@ -479,13 +593,7 @@
                                         <div class="card-item-desc">Organized the annual tech fest, managing a team of 20 volunteers.</div>
                                     </div>
                                 </div>
-                                <div class="card-item" data-year="2023">
-                                    <div class="card-item-dot"></div>
-                                    <div class="card-item-content">
-                                        <div class="card-item-title"></div>
-                                        <div class="card-item-desc"></div>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                         <div class="card-section" id="contact">
@@ -534,13 +642,7 @@
                                         <div class="card-item-desc">Organized the annual tech fest, managing a team of 20 volunteers.</div>
                                     </div>
                                 </div>
-                                <div class="card-item" data-year="2023">
-                                    <div class="card-item-dot"></div>
-                                    <div class="card-item-content">
-                                        <div class="card-item-title"></div>
-                                        <div class="card-item-desc"></div>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                         <div class="card-section" id="contact">
@@ -589,13 +691,7 @@
                                         <div class="card-item-desc">Organized the annual tech fest, managing a team of 20 volunteers.</div>
                                     </div>
                                 </div>
-                                <div class="card-item" data-year="2023">
-                                    <div class="card-item-dot"></div>
-                                    <div class="card-item-content">
-                                        <div class="card-item-title"></div>
-                                        <div class="card-item-desc"></div>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                         <div class="card-section" id="contact">
@@ -644,13 +740,7 @@
                                         <div class="card-item-desc">Organized the annual tech fest, managing a team of 20 volunteers.</div>
                                     </div>
                                 </div>
-                                <div class="card-item" data-year="2023">
-                                    <div class="card-item-dot"></div>
-                                    <div class="card-item-content">
-                                        <div class="card-item-title"></div>
-                                        <div class="card-item-desc"></div>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                         <div class="card-section" id="contact">
@@ -756,13 +846,7 @@
                                         <div class="card-item-desc">Organized the annual tech fest, managing a team of 20 volunteers.</div>
                                     </div>
                                 </div>
-                                <div class="card-item" data-year="2023">
-                                    <div class="card-item-dot"></div>
-                                    <div class="card-item-content">
-                                        <div class="card-item-title"></div>
-                                        <div class="card-item-desc"></div>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                         <div class="card-section" id="contact">
@@ -811,13 +895,7 @@
                                         <div class="card-item-desc">Organized the annual tech fest, managing a team of 20 volunteers.</div>
                                     </div>
                                 </div>
-                                <div class="card-item" data-year="2023">
-                                    <div class="card-item-dot"></div>
-                                    <div class="card-item-content">
-                                        <div class="card-item-title"></div>
-                                        <div class="card-item-desc"></div>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                         <div class="card-section" id="contact">
@@ -866,13 +944,7 @@
                                         <div class="card-item-desc">Organized the annual tech fest, managing a team of 20 volunteers.</div>
                                     </div>
                                 </div>
-                                <div class="card-item" data-year="2023">
-                                    <div class="card-item-dot"></div>
-                                    <div class="card-item-content">
-                                        <div class="card-item-title"></div>
-                                        <div class="card-item-desc"></div>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                         <div class="card-section" id="contact">
@@ -976,13 +1048,7 @@
                                         <div class="card-item-desc">Organized the annual tech fest, managing a team of 20 volunteers.</div>
                                     </div>
                                 </div>
-                                <div class="card-item" data-year="2023">
-                                    <div class="card-item-dot"></div>
-                                    <div class="card-item-content">
-                                        <div class="card-item-title"></div>
-                                        <div class="card-item-desc"></div>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                         <div class="card-section" id="contact">
@@ -1031,13 +1097,7 @@
                                         <div class="card-item-desc">Organized the annual tech fest, managing a team of 20 volunteers.</div>
                                     </div>
                                 </div>
-                                <div class="card-item" data-year="2023">
-                                    <div class="card-item-dot"></div>
-                                    <div class="card-item-content">
-                                        <div class="card-item-title"></div>
-                                        <div class="card-item-desc"></div>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                         <div class="card-section" id="contact">
@@ -1086,13 +1146,7 @@
                                         <div class="card-item-desc">Organized the annual tech fest, managing a team of 20 volunteers.</div>
                                     </div>
                                 </div>
-                                <div class="card-item" data-year="2023">
-                                    <div class="card-item-dot"></div>
-                                    <div class="card-item-content">
-                                        <div class="card-item-title"></div>
-                                        <div class="card-item-desc"></div>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                         <div class="card-section" id="contact">
@@ -1141,13 +1195,7 @@
                                         <div class="card-item-desc">Organized the annual tech fest, managing a team of 20 volunteers.</div>
                                     </div>
                                 </div>
-                                <div class="card-item" data-year="2023">
-                                    <div class="card-item-dot"></div>
-                                    <div class="card-item-content">
-                                        <div class="card-item-title"></div>
-                                        <div class="card-item-desc"></div>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                         <div class="card-section" id="contact">
@@ -1196,13 +1244,7 @@
                                         <div class="card-item-desc">Organized the annual tech fest, managing a team of 20 volunteers.</div>
                                     </div>
                                 </div>
-                                <div class="card-item" data-year="2023">
-                                    <div class="card-item-dot"></div>
-                                    <div class="card-item-content">
-                                        <div class="card-item-title"></div>
-                                        <div class="card-item-desc"></div>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                         <div class="card-section" id="contact">
@@ -1251,13 +1293,7 @@
                                         <div class="card-item-desc">Organized the annual tech fest, managing a team of 20 volunteers.</div>
                                     </div>
                                 </div>
-                                <div class="card-item" data-year="2023">
-                                    <div class="card-item-dot"></div>
-                                    <div class="card-item-content">
-                                        <div class="card-item-title"></div>
-                                        <div class="card-item-desc"></div>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                         <div class="card-section" id="contact">
@@ -1306,13 +1342,7 @@
                                         <div class="card-item-desc">Organized the annual tech fest, managing a team of 20 volunteers.</div>
                                     </div>
                                 </div>
-                                <div class="card-item" data-year="2023">
-                                    <div class="card-item-dot"></div>
-                                    <div class="card-item-content">
-                                        <div class="card-item-title"></div>
-                                        <div class="card-item-desc"></div>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                         <div class="card-section" id="contact">
