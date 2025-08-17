@@ -287,10 +287,12 @@
             display: grid;
             grid-template-columns: repeat(2, minmax(120px, 2fr));
             gap: 1rem;
+            object-fit: cover; 
         }
         @media (max-width: 768px) {
             .event-gallery {
-                grid-template-columns: 1fr; 
+                grid-template-columns: 1fr;
+                object-fit: cover; 
             }
             .event-gallery img {
                 width: 100%;
@@ -300,8 +302,8 @@
                 cursor: pointer;
                 transition: transform 0.3s ease, filter 0.3s ease;
             }
-            .squid{
-                height:30rem;
+            .Squid{
+                height:10rem;
             }
         }
         .event-gallery img {
@@ -528,8 +530,8 @@
                                 16th October,2024<br>
                                 Our fun-filled take on the popular Netflix show turned traditional kid-friendly games into a memorable strategic and skill-building event. From Red Light Green Light to team-based games, participants from all around the community gathered to put their wits and agility to the test through a variety of creatively recreated obstacles                            </p>
                             <div class="event-gallery">
-                                <img class="squid" src="ISTE_Events/Squid/SquidGamesPoster.jpg" style="height: 40rem;" alt="Web Dev Bootcamp Image 1" onclick="openModal(this)">
-                                <img class="squid" src="ISTE_Events/Squid/1.jpg" style="height: 40rem;" alt="Web Dev Bootcamp Image 2" onclick="openModal(this)">
+                                <img class="Squid" src="ISTE_Events/Squid/SquidGamesPoster.jpg" style="height: 40rem;" alt="Web Dev Bootcamp Image 1" onclick="openModal(this)">
+                                <img class="Squid" src="ISTE_Events/Squid/1.jpg" style="height: 40rem;" alt="Web Dev Bootcamp Image 2" onclick="openModal(this)">
                                 <img src="ISTE_Events/Squid/2.webp" alt="Web Dev Bootcamp Image 3" onclick="openModal(this)">
                                 <img src="ISTE_Events/Squid/3.jpg" alt="Web Dev Bootcamp Image 4" onclick="openModal(this)">
                             </div>
