@@ -425,6 +425,11 @@
     /* --- NEWSLETTER SECTION --- */
     .newsletter-container{
         padding: 4rem 0;
+        padding-right: 0;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     .newsletter-content{
         display: flex;
@@ -433,9 +438,11 @@
         border-radius: 1rem;
         overflow: hidden;
         backdrop-filter: blur(10px);
+        max-width: 1000px;
     }
     .news-left{
         width: 50%;
+        max-width: 300px;
         display: none; /* Hidden on mobile */
     }
     .news-left img{
