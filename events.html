@@ -366,7 +366,7 @@
         .event-gallery img {
             width: 100%;
             height: auto;
-             aspect-ratio: 4/3;
+            aspect-ratio: 4/3;
             object-fit: cover;
             border-radius: 0.5rem;
             cursor: pointer;
@@ -398,42 +398,42 @@
             filter: brightness(0.8);
         }
         /* Squid Game-specific gallery layout */
-.squid-gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1.5rem;
-    align-items: start;
-}
+        .squid-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(240px, 1fr));
+            gap: 1.5rem;
+            align-items: start;
+        }
+        
+        /* Default image style */
+        .squid-gallery img {
+            width: 100%;
+            height: 22rem;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
 
-/* Default image style */
-.squid-gallery img {
-    width: 100%;
-    height: 22rem;
-    object-fit: cover;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    transition: transform 0.3s ease, filter 0.3s ease;
-}
-
-/* Extra height for portrait images */
-.squid-gallery img.Squid {
-    height: 30rem;
-}
-
-/* Mobile-friendly */
-@media (max-width: 768px) {
-    .squid-gallery {
-        grid-template-columns: 1fr;
-    }
-
-    .squid-gallery img {
-        height: 13rem;
-    }
-
-    .squid-gallery img.Squid {
-        height: 17rem;
-    }
-}
+        /* Extra height for portrait images */
+        .squid-gallery img.Squid {
+            height: 30rem;
+        }
+        
+        /* Mobile-friendly */
+        @media (max-width: 768px) {
+            .squid-gallery {
+                grid-template-columns: 1fr;
+            }
+        
+            .squid-gallery img {
+                height: 13rem;
+            }
+        
+            .squid-gallery img.Squid {
+                height: 17rem;
+            }
+        }
 
         /* --- MODAL/LIGHTBOX STYLES --- */
         .modal {
@@ -674,37 +674,41 @@
                 <h2 class="section-title">Past Events</h2>
                 <p class="section-subtitle">A look back at our memorable moments.</p>
                 <div class="events-grid">
-                    <!-- Card 2 -->
+                    <!-- Card 1 -->
                     <div class="event-card">
                         <div class="event-card-content">
-                            <h3 class="event-card-title">Generative AI Tools & Applications Session🌐</h3>
+                            <h3 class="event-card-title">Hack The Crisis 3.0💻</h3>
                             <p class="event-card-description">
-                                A hands-on session exploring the latest in Generative AI. Members experimented with various AI tools and learned to apply them in real-world projects, from text generation to image synthesis.
+                                13th-14th March,2024<br>
+                                HackTheCrisis 3.0 at BVCOE New Delhi was a 24-hour national hackathon that brought together 300+ participants and 60+ teams to build tech-driven solutions for climate change and sustainability. With a prize pool of ₹50K+, teams used AI, IoT, and blockchain to innovate across healthcare, finance, education, and smart cities. The event fostered collaboration, learning, and real-world impact.
                             </p>
                             <div class="event-gallery">
-                                <img src="ISTE_Events/GenAI/0.jpg" alt="Generative AI Event Image 1" onclick="openModal(this)">
-                                <img src="ISTE_Events/GenAI/1.jpg" alt="Generative AI Event Image 2" onclick="openModal(this)">
-                                <img src="ISTE_Events/GenAI/2.jpg" alt="Generative AI Event Image 3" onclick="openModal(this)">
-                                <img src="ISTE_Events/GenAI/3.jpg" alt="Generative AI Event Image 4" onclick="openModal(this)">
+                                <img src="ISTE_Events/HTC 3.0/3.jpeg" alt="Web Dev Bootcamp Image 1" onclick="openModal(this)">
+                                <img src="ISTE_Events/HTC 3.0/2.jpeg" alt="Web Dev Bootcamp Image 2" onclick="openModal(this)">
+                                <img src="ISTE_Events/HTC 3.0/1.jpeg" alt="Web Dev Bootcamp Image 3" onclick="openModal(this)">
+                                <img src="ISTE_Events/HTC 3.0/4.jpeg" alt="Web Dev Bootcamp Image 4" onclick="openModal(this)">
                             </div>
                         </div>
                     </div>
-                    <!-- Card 3 -->
+                    <!-- Card 2 -->
                     <div class="event-card">
-                        <div class="event-card-content">
-                            <h3 class="event-card-title">Beyond The Buzzer🕹</h3>
-                            <p class="event-card-description">
-                                Join us for an evening of intellectual fun and competition. The event begins with a general knowledge quiz to test your wits, followed by a final, high-stakes round of Jeopardy to determine our ultimate champion.
-                            </p>
-                            <div class="event-gallery two">
-                                <img src="ISTE_Events/BTB/1.jpg" alt="SETU Competition Image 1" onclick="openModal(this)">
-                                <img src="ISTE_Events/BTB/2.jpg" alt="SETU Competition Image 2" onclick="openModal(this)">
-                                <img src="ISTE_Events/BTB/0.jpg" alt="SETU Competition Image 3" onclick="openModal(this)">
-                                <img src="ISTE_Events/BTB/4.jpg" alt="SETU Competition Image 4" onclick="openModal(this)">
-                            </div>
-                        </div>
+                       <div class="event-card-content">
+                          <h3 class="event-card-title">Squid Games!!</h3>
+                          <p class="event-card-description">
+                            16th October, 2024<br>
+                            Our fun-filled take on the popular Netflix show turned traditional kid-friendly games into a memorable strategic and skill-building event. From Red Light Green Light to team-based games, participants from all around the community gathered to put their wits and agility to the test through a variety of creatively recreated obstacles.
+                         </p>
+
+                           <div class="event-gallery squid-gallery">
+                           <img class="Squid" src="ISTE_Events/Squid/SquidGamesPoster.jpg" alt="Squid Games Poster" onclick="openModal(this)">
+                           <img class="Squid" src="ISTE_Events/Squid/1.jpg" alt="Squid Game Frame" onclick="openModal(this)">
+                           <img src="ISTE_Events/Squid/2.webp" alt="Game in progress" onclick="openModal(this)">
+                           <img src="ISTE_Events/Squid/3.jpg" alt="Group photo" onclick="openModal(this)">
+                           </div>
+                       </div>
                     </div>
-                    <!-- Card 4 -->
+
+                    <!-- Card 3-->
                     <div class="event-card">
                         <div class="event-card-content">
                             <h3 class="event-card-title">Tech Titans💻</h3>
@@ -720,26 +724,39 @@
                             </div>
                         </div>
                     </div>
-
+                    
                     <!-- Card 4 -->
                     <div class="event-card">
-                       <div class="event-card-content">
-                          <h3 class="event-card-title">Squid Games!!</h3>
-                          <p class="event-card-description">
-                            16th October, 2024<br>
-                            Our fun-filled take on the popular Netflix show turned traditional kid-friendly games into a memorable strategic and skill-building event. From Red Light Green Light to team-based games, participants from all around the community gathered to put their wits and agility to the test through a variety of creatively recreated obstacles.
-                         </p>
-
-                   <div class="event-gallery squid-gallery">
-                    <img class="Squid" src="ISTE_Events/Squid/SquidGamesPoster.jpg" alt="Squid Games Poster" onclick="openModal(this)">
-                   <img class="Squid" src="ISTE_Events/Squid/1.jpg" alt="Squid Game Frame" onclick="openModal(this)">
-                   <img src="ISTE_Events/Squid/2.webp" alt="Game in progress" onclick="openModal(this)">
-                   <img src="ISTE_Events/Squid/3.jpg" alt="Group photo" onclick="openModal(this)">
-                  </div>
-                   </div>
-                </div>
-
+                        <div class="event-card-content">
+                            <h3 class="event-card-title">Beyond The Buzzer🕹</h3>
+                            <p class="event-card-description">
+                                Join us for an evening of intellectual fun and competition. The event begins with a general knowledge quiz to test your wits, followed by a final, high-stakes round of Jeopardy to determine our ultimate champion.
+                            </p>
+                            <div class="event-gallery two">
+                                <img src="ISTE_Events/BTB/1.jpg" alt="SETU Competition Image 1" onclick="openModal(this)">
+                                <img src="ISTE_Events/BTB/2.jpg" alt="SETU Competition Image 2" onclick="openModal(this)">
+                                <img src="ISTE_Events/BTB/0.jpg" alt="SETU Competition Image 3" onclick="openModal(this)">
+                                <img src="ISTE_Events/BTB/4.jpg" alt="SETU Competition Image 4" onclick="openModal(this)">
+                            </div>
+                        </div>
+                    </div>
                     <!-- Card 5 -->
+                    <div class="event-card">
+                        <div class="event-card-content">
+                            <h3 class="event-card-title">Generative AI Tools & Applications Session🌐</h3>
+                            <p class="event-card-description">
+                                A hands-on session exploring the latest in Generative AI. Members experimented with various AI tools and learned to apply them in real-world projects, from text generation to image synthesis.
+                            </p>
+                            <div class="event-gallery">
+                                <img src="ISTE_Events/GenAI/0.jpg" alt="Generative AI Event Image 1" onclick="openModal(this)">
+                                <img src="ISTE_Events/GenAI/1.jpg" alt="Generative AI Event Image 2" onclick="openModal(this)">
+                                <img src="ISTE_Events/GenAI/2.jpg" alt="Generative AI Event Image 3" onclick="openModal(this)">
+                                <img src="ISTE_Events/GenAI/3.jpg" alt="Generative AI Event Image 4" onclick="openModal(this)">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 6 -->
                     <div class="event-card">
                         <div class="event-card-content">
                             <h3 class="event-card-title">UpGrad Elevate Seminar</h3>
@@ -751,22 +768,6 @@
                                 <img src="ISTE_Events/UpGrad/UpGrad.webp" style="height: 27.5rem;" alt="Web Dev Bootcamp Image 1" onclick="openModal(this)">
                                 <img src="ISTE_Events/UpGrad/UpGrad1.webp" style="height: 27.5rem;" alt="Web Dev Bootcamp Image 2" onclick="openModal(this)">
                                 <img src="ISTE_Events/UpGrad/UpGradGrp.webp" alt="Web Dev Bootcamp Image 3" onclick="openModal(this)">
-                            </div>
-                        </div>
-                    </div>
-                     <!-- Card 1 -->
-                    <div class="event-card">
-                        <div class="event-card-content">
-                            <h3 class="event-card-title">Hack The Crisis 3.0💻</h3>
-                            <p class="event-card-description">
-                                13th-14th March,2024<br>
-                                HackTheCrisis 3.0 at BVCOE New Delhi was a 24-hour national hackathon that brought together 300+ participants and 60+ teams to build tech-driven solutions for climate change and sustainability. With a prize pool of ₹50K+, teams used AI, IoT, and blockchain to innovate across healthcare, finance, education, and smart cities. The event fostered collaboration, learning, and real-world impact.
-                            </p>
-                            <div class="event-gallery">
-                                <img src="ISTE_Events/HTC 3.0/3.jpeg" alt="Web Dev Bootcamp Image 1" onclick="openModal(this)">
-                                <img src="ISTE_Events/HTC 3.0/2.jpeg" alt="Web Dev Bootcamp Image 2" onclick="openModal(this)">
-                                <img src="ISTE_Events/HTC 3.0/1.jpeg" alt="Web Dev Bootcamp Image 3" onclick="openModal(this)">
-                                <img src="ISTE_Events/HTC 3.0/4.jpeg" alt="Web Dev Bootcamp Image 4" onclick="openModal(this)">
                             </div>
                         </div>
                     </div>
