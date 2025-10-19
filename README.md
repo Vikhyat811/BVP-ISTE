@@ -5,6 +5,6 @@ Our website is live and kicking - a space where innovation, updates, and opportu
 
 🔗 Explore it here: [https://bvp-iste.vercel.app/]
 
-Crafted with passion and speed by @Vikhyat 💻 (Softech Head) along with Himank...
+Crafted with passion and speed by @Vikhyat 💻 (Softech Head) along with Himank!!
 
 💙 BVP ISTE – Where Knowledge Meets Innovation.
